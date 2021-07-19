@@ -3,18 +3,23 @@ const express = require('express')
 const router = express.Router()
 // 引用 model
 const UserDate = require('../../model/userDate')
-// 定義路由
-router.get('/', (req, res) => {
-  res.render('index')
-})
 
 
 //creat
 router.post('/', (req, res) => {
-  const { email, password } = req.body
-  return UserDate.create({ email, password })
-    .then(() => res.redirect('/'))
-    .catch(error => console.log(error))
+  console.log(req.body)
+  UserDate.find(
+    { $and: [{ email: req.body.email }, { password: req.body.password }] })
+    .lean()
+    .then(user => {
+      if (user.length === 0) {
+        res.render('index', { alert: true })
+      } else {
+        res.render('welcome', { firstName: user[0].firstName })
+      }
+    }
+
+    )
 })
 
 
