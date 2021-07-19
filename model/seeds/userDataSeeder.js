@@ -1,6 +1,6 @@
 const UserData = require('../userDate')
-const db = require('../../config/moongoose')
 const UserDataSeed = require('./userData.json')
+const db = require('../../config/moongoose')
 
 
 db.once('open', () => {
