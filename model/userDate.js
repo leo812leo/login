@@ -2,8 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const UserDataSchema = new Schema({
   firstName: {
-    type: String,
-    required: true
+    type: String
   },
   email: {
     type: String,
